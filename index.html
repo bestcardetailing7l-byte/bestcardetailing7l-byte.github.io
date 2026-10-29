@@ -175,8 +175,9 @@ footer img{height:54px;width:auto;mix-blend-mode:lighten;display:block}
 footer p{margin:0;color:var(--dim);font-size:14px}
 footer .flink{color:var(--gold);text-decoration:none}
 footer .flink:hover{text-decoration:underline}
-.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:50;width:60px;height:60px;border-radius:50%;background:#1FAA59;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.5);text-decoration:none}
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:50;width:60px;height:60px;border-radius:50%;background:#1FAA59;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.5);text-decoration:none;animation:waBounce 1.9s ease-in-out infinite}
 .fab svg{width:32px;height:32px}
+@keyframes waBounce{0%,100%{transform:translateY(0)}20%{transform:translateY(-14px)}40%{transform:translateY(0)}55%{transform:translateY(-7px)}70%{transform:translateY(0)}85%{transform:translateY(-3px)}}
 .cart{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:49;background:var(--gold);color:#0A0A0B;text-decoration:none;font:800 18px var(--f-disp);font-style:italic;text-transform:uppercase;letter-spacing:.04em;padding:12px 22px;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);white-space:nowrap}
 /* tratamentos em cartões (celular) */
 .tiers{display:none;gap:12px}
@@ -253,6 +254,10 @@ footer .flink:hover{text-decoration:underline}
 .pmodal h3{font-size:34px;margin:0 0 6px}
 .pmodal .busca{width:100%;font:500 16px var(--f-body);background:var(--ink);color:var(--chrome);border:1px solid var(--line);padding:12px;margin:12px 0}
 .pmodal .res{min-height:22px;font:600 15px var(--f-body);margin-bottom:6px}
+.pmodal .res .whead{display:block;margin:2px 0 8px}
+.pmodal .res .wload{color:var(--steel);display:block}
+.pmodal .res .witem{display:block;background:var(--ink);border:1px solid var(--line);border-left:3px solid var(--gold);padding:8px 10px;margin-top:8px;font:400 13px/1.5 var(--f-body);color:var(--steel)}
+.pmodal .res .witem b{display:block;color:var(--chrome);font:600 12px var(--f-body);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
 .ptipos{display:grid;gap:10px}
 .ptipo{text-align:left;background:var(--ink);border:1px solid var(--line);color:var(--chrome);padding:14px;cursor:pointer;display:grid;gap:6px;font:inherit}
 .ptipo:hover,.ptipo:focus-visible{border-color:var(--gold)}
@@ -263,6 +268,8 @@ footer .flink:hover{text-decoration:underline}
 .ptipo[aria-pressed="true"]{border-color:var(--gold);background:var(--ink-3)}
 .pmodal .x{float:right;background:none;border:1px solid var(--line);color:var(--chrome);width:40px;height:40px;font-size:20px;cursor:pointer}
 .copy{background:none;border:1px solid var(--line);color:var(--steel);font:600 12px var(--f-body);letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;cursor:pointer;justify-self:start}
+.cbox .open-wa{justify-self:start;background:var(--gold);color:#0A0A0B;font:700 12px var(--f-body);letter-spacing:.1em;text-transform:uppercase;padding:8px 14px;text-decoration:none;display:inline-block}
+.cbox .open-wa:hover{background:var(--gold-hot)}
 </style>
 
 <header class="top"><div class="wrap">
@@ -337,8 +344,9 @@ footer .flink:hover{text-decoration:underline}
         <label for="qNome">Seu nome<input id="qNome" autocomplete="name" placeholder="Como podemos te chamar"></label>
         <label for="qCarro">Carro<input id="qCarro" placeholder="Modelo e ano"></label>
         <label for="qDia">Dia de preferência<input type="date" id="qDia"></label>
-        <p class="note" id="qDiaMsg">Cada carro leva no mínimo 4 horas, então recebemos poucos carros por dia. A gente confirma se o dia está livre.</p>
+        <p class="note" id="qDiaMsg">Verifique disponibilidade</p>
         <label class="row" for="qBusca"><input type="checkbox" id="qBusca"><span>Quero que busquem o carro</span></label>
+        <p class="note warn" id="qTaxaMsg" hidden>Verifique a taxa de deslocamento para sua região.</p>
         <a class="btn btn-gold" id="qSend" target="_blank" rel="noopener" href="https://wa.me/5531991405561" style="justify-content:center">Agendar pelo WhatsApp</a>
         <p class="note">Abre o WhatsApp com o pedido de agendamento pronto. É só tocar em enviar. A gente confirma o dia por lá. Se não abrir, chame no <b style="user-select:all">(31) 99140-5561</b>.</p>
       </aside>
@@ -350,7 +358,7 @@ footer .flink:hover{text-decoration:underline}
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">Contato</span><h2 class="disp">Vem pra <span class="gold">Bestcar</span></h2></div>
     <div class="contact">
-      <div class="cbox"><span class="k">WhatsApp</span><span class="v">(31) 99140-5561</span><button class="copy" data-copy="31991405561">Copiar número</button></div>
+      <div class="cbox"><span class="k">WhatsApp</span><span class="v">(31) 99140-5561</span><button class="copy" data-copy="31991405561">Copiar número</button><a class="open-wa" href="https://wa.me/5531991405561" target="_blank" rel="noopener">Abrir WhatsApp</a></div>
       <div class="cbox"><span class="k">Endereço</span><span class="v">Av. Secretário Divino Padrão, 98</span><span class="s">Piedade · Sete Lagoas, MG</span><a class="s" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Av+Secretário+Divino+Padrão+98+Piedade+Sete+Lagoas+MG">Abrir no mapa</a></div>
       <div class="cbox"><span class="k">Avaliação</span><span class="v">4.98 / 5</span><span class="s">Mais de 90 avaliações no Google · 3000+ clientes desde 2021.</span></div>
       <div class="cbox"><span class="k">Instagram</span><span class="v" style="font-size:24px;text-transform:none">@bestcardetailing7l</span><a class="s" target="_blank" rel="noopener" href="https://www.instagram.com/bestcardetailing7l/">Ver os trabalhos</a></div>
@@ -465,8 +473,10 @@ function atualizaWa(){
   if (dia){ const [y,m,d] = dia.split("-").map(Number); const dt = new Date(y,m-1,d); diaTxt = DS[dt.getDay()]+", "+String(d).padStart(2,"0")+"/"+String(m).padStart(2,"0"); }
   const fds = dia && [0,6].includes(new Date(dia+"T12:00").getDay());
   const aviso = document.getElementById("qDiaMsg");
-  aviso.textContent = fds ? "Esse dia cai no fim de semana. Atendemos de segunda a sexta." : "Cada carro leva no mínimo 4 horas, então recebemos poucos carros por dia. A gente confirma se o dia está livre.";
+  aviso.textContent = fds ? "Esse dia cai no fim de semana. Atendemos de segunda a sexta." : "Verifique disponibilidade";
   aviso.classList.toggle("warn", !!fds);
+  const taxa = document.getElementById("qTaxaMsg");
+  if (taxa) taxa.hidden = !busca;
   const linhas = [];
   linhas.push("*NOVO AGENDAMENTO* pelo site");
   linhas.push("Olá, Bestcar"+(nome?"! Aqui é "+nome:""));
@@ -522,12 +532,91 @@ document.getElementById("pmBusca").addEventListener("input", e => {
   /* pontua cada modelo: nome igual vence; senão, o modelo mais longo contido no que foi digitado; senão, começo do nome */
   const pts = m => { const n = norm(m); return n === q ? 1000 : q.includes(n) ? n.length*10 : n.startsWith(q) ? 5 : n.includes(q) ? 1 : 0; };
   const notas = PORTES.map(x => ({x, s: Math.max(...x.ex.map(pts))})).filter(o => o.s > 0).sort((a,b) => b.s - a.s);
-  if (!notas.length){ res.innerHTML = '<span style="color:var(--steel)">Não achamos esse modelo. Escolha pelo tipo abaixo ou chame no WhatsApp.</span>'; document.querySelectorAll(".ptipo").forEach(b => b.style.display = ""); return; }
+  if (!notas.length){ buscaWeb(e.target.value.trim()); return; }
   const achados = notas.filter(o => o.s === notas[0].s).map(o => o.x);
   const x = achados[0];
   res.innerHTML = 'Seu carro é porte <b class="gold">'+x.p+'</b> ('+x.nome.toLowerCase()+'). Toque abaixo pra escolher.';
   document.querySelectorAll(".ptipo").forEach(b => { if (!achados.some(a => a.p === b.dataset.escolhe)) b.style.display = "none"; });
 });
+/* busca na web sem sair do site: Wikipedia (CORS aberto, responde rápido) */
+let buscaToken = 0, buscaT = null;
+function buscaWeb(termo){
+  const res = document.getElementById("pmRes");
+  document.querySelectorAll(".ptipo").forEach(b => b.style.display = "");
+  if (norm(termo).length < 2){ res.textContent = ""; return; }
+  const meu = ++buscaToken;
+  clearTimeout(buscaT);
+  buscaT = setTimeout(() => rodaBusca(termo, meu), 650);
+}
+async function getJson(url){
+  const ctrl = new AbortController(); const to = setTimeout(() => ctrl.abort(), 8000);
+  try {
+    const r = await fetch(url, { signal: ctrl.signal });
+    if (!r.ok) return null;
+    const ct = r.headers.get("content-type") || "";
+    if (!ct.includes("json")) return null; /* evita rate-limit/HTML na cara */
+    return await r.json();
+  } catch(e){ return null; } finally { clearTimeout(to); }
+}
+/* acha a página certa: compara por palavras ("audi rs q8" bate com "audi q8") */
+function palavras(s){ return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").split(/[^a-z0-9]+/).filter(w => w.length >= 2); }
+function melhorTitulo(hits, termo){
+  const tw = palavras(termo);
+  let melhor = null, melhorNota = 0;
+  for (const h of hits || []) {
+    const nw = palavras(h.title);
+    const achou = tw.filter(w => nw.some(x => x.includes(w) || w.includes(x))).length;
+    const nota = tw.length ? achou / tw.length : 0;
+    if (nota > melhorNota) { melhorNota = nota; melhor = h.title; }
+  }
+  return melhorNota >= 0.5 ? melhor : null;
+}
+async function wiki(termo){
+  for (const lang of ["pt","en"]) {
+    const s = await getJson("https://"+lang+".wikipedia.org/w/api.php?action=query&list=search&srsearch="+encodeURIComponent(termo)+"&srlimit=4&format=json&origin=*");
+    const hit = melhorTitulo(s?.query?.search, termo);
+    if (!hit) continue;
+    const w = await getJson("https://"+lang+".wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(hit)+"?redirect=true");
+    if (w && w.extract) return { fonte:"Wikipedia ("+lang.toUpperCase()+")", titulo:hit, texto:w.extract };
+  }
+  return null;
+}
+/* classifica o porte pelo texto encontrado (funciona em pt e en) */
+function classificaPorte(texto){
+  const t = norm(texto);
+  /* peso 2 = palavra de tamanho (manda mais que "crossover"/"suv" solto) */
+  const sinal = {
+    PP: [["portequeno",1],["pequenoporte",1],["citycar",1],["citadino",1],["hatchurbano",1],["subcompact",2],["microssuv",1],["segmentoa",1],["segmentob",1]],
+    PM: [["portemedio",1],["medioporque",1],["segmentoc",1],["sedan",1],["compacto",2],["compact",2],["suvcompacto",2],["hatch",1]],
+    PG: [["portegrande",1],["grandeporte",1],["segmentod",1],["segmentoe",1],["segmentof",1],["picape",2],["pickup",2],["sup",2],["fullsize",2],["midsize",2],["large",1],["grande",1],["suvgrande",2],["van",1],["minivan",1],["monovolume",1]]
+  };
+  const pts = { PP:0, PM:0, PG:0 };
+  for (const p in sinal) for (const [s, w] of sinal[p]) pts[p] += (t.split(s).length - 1) * w;
+  const top = Math.max(pts.PP, pts.PM, pts.PG);
+  if (top <= 0) return null;
+  const chaves = Object.keys(pts).filter(p => pts[p] === top);
+  return chaves.length === 1 ? { porte: chaves[0], pts } : null;
+}
+async function rodaBusca(termo, meu){
+  const res = document.getElementById("pmRes");
+  res.innerHTML = '<span class="wload">🔍 Buscando “'+esc(termo)+'” na web…</span>';
+  const fontes = [];
+  const w = await wiki(termo);
+  if (w) fontes.push(w);
+  if (meu !== buscaToken) return; /* digitou de novo: descarta */
+  if (!fontes.length){
+    res.innerHTML = '<span style="color:var(--steel)">Não conseguimos buscar agora. Toque no tipo do carro aqui embaixo ou chame no WhatsApp.</span>';
+    return;
+  }
+  const tudo = fontes.map(f => f.texto).join(" \n ");
+  const sug = classificaPorte(tudo);
+  const itens = fontes.map(f =>
+    '<span class="witem"><b>'+esc(f.fonte)+(f.titulo?": "+esc(f.titulo):"")+'</b>'+esc(f.texto)+'</span>').join("");
+  const head = sug
+    ? '<span class="whead">O <b>'+esc(termo)+'</b> aparece como <b class="gold">porte '+sug.porte+'</b>. Toque no porte abaixo pra confirmar.</span>'
+    : '<span class="whead">Encontramos estas informações sobre <b>'+esc(termo)+'</b>. Compare com os tipos abaixo e toque no certo.</span>';
+  res.innerHTML = head + itens;
+}
 const frases = ["PPF","Vitrificação","Polimento técnico","Higienização","Pintura de pinças","3000+ clientes","Desde 2021","Sete Lagoas MG","Nota 4.98"];
 document.getElementById("tick").innerHTML = (frases.map(f=>"<span>"+f+"</span>").join("")).repeat(2);
 setPorte(porte);
